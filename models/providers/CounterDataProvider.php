@@ -11,6 +11,7 @@ namespace app\models\providers;
 
 use app\components\extensions\AppDataProvider;
 use app\components\GridConfig;
+use app\models\Counter;
 use app\models\User;
 use kartik\grid\DataColumn;
 use Mpdf\Tag\U;
@@ -20,7 +21,7 @@ use yii\data\ActiveDataProvider;
 use yii\db\ActiveRecord;
 use yii\helpers\Url;
 
-class UserDataProvider extends AppDataProvider
+class CounterDataProvider extends AppDataProvider
 {
 
     /**
@@ -28,7 +29,7 @@ class UserDataProvider extends AppDataProvider
      */
     function query()
     {
-        $this->query = User::find();
+        $this->query = Counter::find();
     }
 
     /**
@@ -37,9 +38,8 @@ class UserDataProvider extends AppDataProvider
     function columns()
     {
         return [
-            ['attribute' => 'name'],
-            ['attribute' => 'username'],
-            ['attribute' => 'email'],
+            ['attribute' => 'id'],
+            ['attribute' => 'zone.name'],
         ];
     }
 
@@ -49,6 +49,6 @@ class UserDataProvider extends AppDataProvider
      */
     function searchFields()
     {
-        return ['name', 'username', 'email'];
+        return [];
     }
 }

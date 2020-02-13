@@ -12,6 +12,7 @@ namespace app\models\providers;
 use app\components\extensions\AppDataProvider;
 use app\components\GridConfig;
 use app\models\User;
+use app\models\Zone;
 use kartik\grid\DataColumn;
 use Mpdf\Tag\U;
 use yii\base\Model;
@@ -20,7 +21,7 @@ use yii\data\ActiveDataProvider;
 use yii\db\ActiveRecord;
 use yii\helpers\Url;
 
-class UserDataProvider extends AppDataProvider
+class ZoneDataProvider extends AppDataProvider
 {
 
     /**
@@ -28,7 +29,7 @@ class UserDataProvider extends AppDataProvider
      */
     function query()
     {
-        $this->query = User::find();
+        $this->query = Zone::find();
     }
 
     /**
@@ -38,8 +39,6 @@ class UserDataProvider extends AppDataProvider
     {
         return [
             ['attribute' => 'name'],
-            ['attribute' => 'username'],
-            ['attribute' => 'email'],
         ];
     }
 
@@ -49,6 +48,6 @@ class UserDataProvider extends AppDataProvider
      */
     function searchFields()
     {
-        return ['name', 'username', 'email'];
+        return [];
     }
 }

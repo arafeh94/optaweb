@@ -89,7 +89,7 @@ abstract class AppDataProvider extends ActiveDataProvider
         return [
             'class' => 'kartik\grid\ActionColumn',
             'template' => '{update} {delete}',
-            'options' => ['style' => 'asd'],
+            'options' => ['style' => ''],
             'buttons' => [
                 'update' => function ($key, $model, $index) {
                     $url = Url::to([\Yii::$app->controller->id . "/view", 'id' => $model->id]);

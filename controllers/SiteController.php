@@ -72,7 +72,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->redirect(['project/index']);
+        return $this->redirect(['flight-group/index']);
     }
 
     /**

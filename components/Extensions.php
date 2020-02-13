@@ -11,6 +11,7 @@ namespace app\components;
 
 use Yii;
 use yii\bootstrap\Html;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 
 class Extensions extends Controller
@@ -26,6 +27,22 @@ class Extensions extends Controller
                 ]),
                 'asButton' => true
             ]
+        ];
+    }
+
+
+    public static function picker()
+    {
+        return [
+            'pluginOptions' => ['format' => 'yyyy-mm-dd hh:ii:00', 'autoclose' => true,],
+            'options' => ['class' => 'form-control', 'autocomplete' => 'off']
+        ];
+    }
+    public static function picker_date()
+    {
+        return [
+            'pluginOptions' => ['format' => 'yyyy-mm-dd', 'autoclose' => true,],
+            'options' => ['class' => 'form-control', 'autocomplete' => 'off']
         ];
     }
 

@@ -5,7 +5,7 @@ $params = require __DIR__ . '/params.php';
 
 $config = [
     'id' => 'basic',
-    'name' => 'Procurement Management System',
+    'name' => 'Flight Management Solution',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log', 'jsUrlManager'],
     'aliases' => [

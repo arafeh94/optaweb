@@ -14,11 +14,8 @@ use yii\web\IdentityInterface;
  * @property int $id
  * @property string $username
  * @property string $password
- * @property string $name
  * @property int $type
  * @property bool $is_deleted
- * @property string $date_created
- * @property string $date_updated
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -49,11 +46,9 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['username', 'password', 'name', 'type'], 'required'],
-            [['type'], 'integer'],
+            [['username', 'password', 'type'], 'required'],
             [['is_deleted'], 'boolean'],
-            [['date_added', 'date_updated'], 'date'],
-            [['username', 'password', 'name'], 'string', 'max' => 255],
+            [['username', 'password'], 'string', 'max' => 255],
             [['username'], 'unique', 'targetAttribute' => ['username'], 'filter' => ['is_deleted' => 0]],
         ];
     }

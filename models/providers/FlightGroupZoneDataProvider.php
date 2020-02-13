@@ -11,6 +11,7 @@ namespace app\models\providers;
 
 use app\components\extensions\AppDataProvider;
 use app\components\GridConfig;
+use app\models\FlightGroupZone;
 use app\models\User;
 use kartik\grid\DataColumn;
 use Mpdf\Tag\U;
@@ -20,7 +21,7 @@ use yii\data\ActiveDataProvider;
 use yii\db\ActiveRecord;
 use yii\helpers\Url;
 
-class UserDataProvider extends AppDataProvider
+class FlightGroupZoneDataProvider extends AppDataProvider
 {
 
     /**
@@ -28,7 +29,7 @@ class UserDataProvider extends AppDataProvider
      */
     function query()
     {
-        $this->query = User::find();
+        $this->query = FlightGroupZone::find();
     }
 
     /**
@@ -37,9 +38,9 @@ class UserDataProvider extends AppDataProvider
     function columns()
     {
         return [
-            ['attribute' => 'name'],
-            ['attribute' => 'username'],
-            ['attribute' => 'email'],
+            ['attribute' => 'id'],
+            ['attribute' => 'flightGroup.name', 'label' => 'Flight Group'],
+            ['attribute' => 'zone.name', 'label' => 'Zone'],
         ];
     }
 
@@ -49,6 +50,6 @@ class UserDataProvider extends AppDataProvider
      */
     function searchFields()
     {
-        return ['name', 'username', 'email'];
+        return [];
     }
 }

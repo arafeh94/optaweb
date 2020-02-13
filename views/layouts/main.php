@@ -31,17 +31,14 @@ ToastrAsset::register($this);
 
 <?php
 $navigationItems = [
-    ['label' => 'Projects', 'url' => ['project/index'], 'type' => 1],
-    ['label' => 'Customers', 'url' => ['customer/index'], 'type' => 1],
-    ['label' => 'Invoices', 'url' => ['invoice/index'], 'type' => 1],
-    ['label' => 'Projects Payments', 'url' => ['project-payment/index'], 'type' => 1],
-    ['label' => 'Employees', 'url' => ['employee/index'], 'type' => 1],
-    ['label' => 'Procurements', 'url' => ['procurement/index'], 'type' => 1],
-    ['label' => 'Projects Expenses', 'url' => ['project-expense/index'], 'type' => 1],
-    ['label' => 'Suppliers', 'url' => ['supplier/index'], 'type' => 1],
-    ['label' => 'Releases', 'url' => ['release/index'], 'type' => 1],
+    ['label' => 'Flight Groups', 'url' => ['flight-group/index'], 'type' => 1],
+    ['label' => 'Zones', 'url' => ['zone/index'], 'type' => 1],
+    ['label' => 'Counters', 'url' => ['counter/index'], 'type' => 1],
+    ['label' => 'Requirements', 'url' => ['requirement/index'], 'type' => 1],
+    ['label' => 'Preferences', 'url' => ['flight-group-zone/index'], 'type' => 1],
+    ['label' => 'Solve', 'url' => ['solve/index'], 'type' => 1],
 ];
-
+Yii::$app->end(1);
 $currentAction = Yii::$app->controller->id . '/' . Yii::$app->controller->action->id;
 $urls = array_map(function ($item) {
     return $item['url'][0];
@@ -76,7 +73,7 @@ if (!in_array($currentAction, $urls)) {
                     <?php foreach ($navigationItems as $item) : ?>
                         <?php if ($item['type'] >= User::get()->type): ?>
                             <?php $active = $this->context->route == $item['url'][0] ? 'active-link' : ''; ?>
-                            <?= Html::a("<li class='$active'>$item[label]</li>", Url::to($item['url']), ArrayHelper::getValue($item, 'options', [])) ?>
+                            <?= Html::a("<li class='$active'>$item[label]</li>", Url::to($item['url']), ArrayHelper::getValue($item, 'options', [])); ?>
                         <?php endif; ?>
                     <?php endforeach; ?>
                 <?php endif; ?>

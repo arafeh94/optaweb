@@ -6,19 +6,14 @@
  * Time: 3:38 PM
  */
 
-/** @var $model Invoice */
+/** @var $model User */
 
-
-use app\models\Category;
-use app\models\Invoice;
-use kartik\widgets\Select2;
+use app\models\User;
 use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Alert;
 use yii\bootstrap\Html;
-use yii\helpers\ArrayHelper;
-use yii\jui\DatePicker;
 
-if (!isset($model)) $model = new Category();
+if (!isset($model)) $model = new \app\models\FlightGroupZone();
 ?>
 
 
@@ -30,12 +25,27 @@ if (!isset($model)) $model = new Category();
 
 <?php $form = ActiveForm::begin([
     'id' => 'model-form',
-    'action' => ['category/update'],
+    'action' => ['flight-group-zone/update'],
     'options' => ['data-pjax' => '']
 ]) ?>
 <?= $form->field($model, 'id')->hiddenInput()->label(false) ?>
-<?= $form->field($model, 'name')->textInput() ?>
-
+<?= $form->field($model, 'flight_group_id')->label('Flight Group')->widget(\kartik\select2\Select2::classname(), [
+    'data' => \yii\helpers\ArrayHelper::map(\app\models\FlightGroup::find()->all(), 'id', 'name'),
+    'options' => ['placeholder' => ''],
+    'pluginOptions' => [
+        'allowClear' => true
+    ],
+    'addon' => \app\components\Extensions::select2Add(['flight-group/index'], 'Add Flight Group')
+]); ?>
+<?= $form->field($model, 'zone_id')->label('Zone')->widget(\kartik\select2\Select2::classname(), [
+    'data' => \yii\helpers\ArrayHelper::map(\app\models\Zone::find()->all(), 'id', 'name'),
+    'options' => ['placeholder' => ''],
+    'pluginOptions' => [
+        'allowClear' => true
+    ],
+    'addon' => \app\components\Extensions::select2Add(['zone/index'], 'Add Zone')
+]); ?>
+<?= $form->field($model, 'points')->textInput() ?>
 <div class="button-container">
     <?= Html::submitButton(Html::tag('i', '', ['class' => 'glyphicon glyphicon-refresh spin hidden']) . ' submit', ['class' => 'btn btn-success', 'id' => 'modal-form-submit']) ?>
     <?= Html::button('close', ['data-dismiss' => "modal", 'class' => 'btn btn-danger']) ?>
