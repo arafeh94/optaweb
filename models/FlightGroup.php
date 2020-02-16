@@ -8,7 +8,6 @@ use Yii;
  * This is the model class for table "flight_group".
  *
  * @property int $id
- * @property bool $planned
  * @property string $name
  *
  * @property FlightGroupZone[] $flightGroupZones
@@ -32,7 +31,7 @@ class FlightGroup extends \yii\db\ActiveRecord
         return [
             [['name'], 'required'],
             [['id'], 'integer'],
-            [['planned','is_deleted'], 'boolean'],
+            [['is_deleted'], 'boolean'],
             [['id'], 'unique'],
         ];
     }
@@ -44,7 +43,6 @@ class FlightGroup extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'planned' => 'Planned',
             'name' => 'Name',
         ];
     }

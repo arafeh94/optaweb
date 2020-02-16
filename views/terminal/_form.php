@@ -13,7 +13,7 @@ use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Alert;
 use yii\bootstrap\Html;
 
-if (!isset($model)) $model = new \app\models\Zone();
+if (!isset($model)) $model = new \app\models\Terminal();
 ?>
 
 
@@ -25,20 +25,11 @@ if (!isset($model)) $model = new \app\models\Zone();
 
 <?php $form = ActiveForm::begin([
     'id' => 'model-form',
-    'action' => ['zone/update'],
+    'action' => ['terminal/update'],
     'options' => ['data-pjax' => '']
 ]) ?>
 <?= $form->field($model, 'id')->hiddenInput()->label(false) ?>
 <?= $form->field($model, 'name')->textInput() ?>
-<?= $form->field($model, 'max_passenger')->textInput() ?>
-<?= $form->field($model, 'terminal_id')->label('Terminal')->widget(\kartik\select2\Select2::classname(), [
-    'data' => \yii\helpers\ArrayHelper::map(\app\models\Terminal::find()->active()->all(), 'id', 'name'),
-    'options' => ['placeholder' => ''],
-    'pluginOptions' => [
-        'allowClear' => true
-    ],
-    'addon' => \app\components\Extensions::select2Add(['terminal/index'], 'Add Terminal')
-]); ?>
 <div class="button-container">
     <?= Html::submitButton(Html::tag('i', '', ['class' => 'glyphicon glyphicon-refresh spin hidden']) . ' submit', ['class' => 'btn btn-success', 'id' => 'modal-form-submit']) ?>
     <?= Html::button('close', ['data-dismiss' => "modal", 'class' => 'btn btn-danger']) ?>

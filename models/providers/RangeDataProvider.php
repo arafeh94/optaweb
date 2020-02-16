@@ -11,7 +11,8 @@ namespace app\models\providers;
 
 use app\components\extensions\AppDataProvider;
 use app\components\GridConfig;
-use app\models\Requirement;
+use app\models\Counter;
+use app\models\Range;
 use app\models\User;
 use kartik\grid\DataColumn;
 use Mpdf\Tag\U;
@@ -21,7 +22,7 @@ use yii\data\ActiveDataProvider;
 use yii\db\ActiveRecord;
 use yii\helpers\Url;
 
-class RequirementDataProvider extends AppDataProvider
+class RangeDataProvider extends AppDataProvider
 {
 
     /**
@@ -29,7 +30,7 @@ class RequirementDataProvider extends AppDataProvider
      */
     function query()
     {
-        $this->query = Requirement::find();
+        $this->query = Range::find();
     }
 
     /**
@@ -39,13 +40,7 @@ class RequirementDataProvider extends AppDataProvider
     {
         return [
             ['attribute' => 'id'],
-            ['attribute' => 'date_start'],
-            ['attribute' => 'date_end'], //khalast hu2 kif issa l Requirement class
-            ['attribute' => 'buffer_time'],
-            ['attribute' => 'flightGroup.id', 'label' => 'Flight Group'],
-            ['attribute' => 'counter.id', 'label' => 'Counter'],
-            ['attribute' => 'class_type'],
-
+            ['attribute' => 'zone.name', 'label' => 'Zone'],
         ];
     }
 

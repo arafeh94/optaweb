@@ -38,12 +38,23 @@ class Extensions extends Controller
             'options' => ['class' => 'form-control', 'autocomplete' => 'off']
         ];
     }
+
     public static function picker_date()
     {
         return [
             'pluginOptions' => ['format' => 'yyyy-mm-dd', 'autoclose' => true,],
             'options' => ['class' => 'form-control', 'autocomplete' => 'off']
         ];
+    }
+
+    public static function picker_time()
+    {
+        return ['pluginOptions' => [
+            'showSeconds' => true,
+            'showMeridian' => false,
+            'minuteStep' => 1,
+            'secondStep' => 5,
+        ]];
     }
 
 }

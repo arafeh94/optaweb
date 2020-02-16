@@ -40,7 +40,6 @@ class FlightGroupDataProvider extends AppDataProvider
         return [
             ['attribute' => 'id'],
             ['attribute' => 'name'],
-            ['attribute' => 'planned', 'format' => 'boolean'],
         ];
     }
 

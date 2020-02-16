@@ -13,7 +13,7 @@ use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Alert;
 use yii\bootstrap\Html;
 
-if (!isset($model)) $model = new \app\models\Requirement();
+if (!isset($model)) $model = new \app\models\Range();
 ?>
 
 
@@ -25,29 +25,18 @@ if (!isset($model)) $model = new \app\models\Requirement();
 
 <?php $form = ActiveForm::begin([
     'id' => 'model-form',
-    'action' => ['requirement/update'],
+    'action' => ['range/update'],
     'options' => ['data-pjax' => '']
 ]) ?>
 <?= $form->field($model, 'id')->hiddenInput()->label(false) ?>
-<?= $form->field($model, 'buffer_time')->textInput() ?>
-<?= $form->field($model, 'flight_group_id')->label('Flight Group')->widget(\kartik\select2\Select2::classname(), [
-    'data' => \yii\helpers\ArrayHelper::map(\app\models\FlightGroup::find()->all(), 'id', 'name'),
+<?= $form->field($model, 'zone_id')->label('Zone')->widget(\kartik\select2\Select2::classname(), [
+    'data' => \yii\helpers\ArrayHelper::map(\app\models\Zone::find()->all(), 'id', 'name'),
     'options' => ['placeholder' => ''],
     'pluginOptions' => [
         'allowClear' => true
     ],
-    'addon' => \app\components\Extensions::select2Add(['flight-group/index'], 'Add Flight Group')
+    'addon' => \app\components\Extensions::select2Add(['zone/index'], 'Add Zone')
 ]); ?>
-<?= $form->field($model, 'class_type')->widget(\kartik\select2\Select2::classname(), [
-    'data' => ['1' => 'Economy Class', '2' => 'Business Class', '3' => 'First Class'],
-    'options' => ['placeholder' => ''],
-    'pluginOptions' => [
-        'allowClear' => true
-    ],
-    'addon' => \app\components\Extensions::select2Add(['belt/index'], 'Add Belt')
-]); ?>
-<?= $form->field($model, 'date_start')->widget(\kartik\datetime\DateTimePicker::className(), \app\components\Extensions::picker()) ?>
-<?= $form->field($model, 'date_end')->widget(\kartik\datetime\DateTimePicker::className(), \app\components\Extensions::picker()) ?>
 <div class="button-container">
     <?= Html::submitButton(Html::tag('i', '', ['class' => 'glyphicon glyphicon-refresh spin hidden']) . ' submit', ['class' => 'btn btn-success', 'id' => 'modal-form-submit']) ?>
     <?= Html::button('close', ['data-dismiss' => "modal", 'class' => 'btn btn-danger']) ?>

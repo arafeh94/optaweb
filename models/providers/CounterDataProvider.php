@@ -39,7 +39,14 @@ class CounterDataProvider extends AppDataProvider
     {
         return [
             ['attribute' => 'id'],
-            ['attribute' => 'zone.name'],
+            ['attribute' => 'range.zone.name', 'label' => 'Zone'],
+            ['attribute' => 'range.id', 'label' => 'Range'],
+            ['attribute' => 'belt.name', 'label' => 'Belt'],
+            ['attribute' => 'unavailabilityPeriodStartTime'],
+            ['attribute' => 'unavailabilityPeriodEndTime'],
+            ['attribute' => 'ratio_passenger_per_timeunit'],
+            ['attribute' => 'proximity'],
+            ['attribute' => 'total_passengers'],
         ];
     }
 

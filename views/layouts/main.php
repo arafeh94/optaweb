@@ -32,13 +32,17 @@ ToastrAsset::register($this);
 <?php
 $navigationItems = [
     ['label' => 'Flight Groups', 'url' => ['flight-group/index'], 'type' => 1],
+    ['label' => 'Terminals', 'url' => ['terminal/index'], 'type' => 1],
     ['label' => 'Zones', 'url' => ['zone/index'], 'type' => 1],
+    ['label' => 'Ranges', 'url' => ['range/index'], 'type' => 1],
+    ['label' => 'Belts', 'url' => ['belt/index'], 'type' => 1],
+    ['label' => 'Conjunctions', 'url' => ['conjunction/index'], 'type' => 1],
     ['label' => 'Counters', 'url' => ['counter/index'], 'type' => 1],
     ['label' => 'Requirements', 'url' => ['requirement/index'], 'type' => 1],
     ['label' => 'Preferences', 'url' => ['flight-group-zone/index'], 'type' => 1],
     ['label' => 'Solve', 'url' => ['solve/index'], 'type' => 1],
 ];
-Yii::$app->end(1);
+
 $currentAction = Yii::$app->controller->id . '/' . Yii::$app->controller->action->id;
 $urls = array_map(function ($item) {
     return $item['url'][0];

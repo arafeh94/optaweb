@@ -11,9 +11,9 @@ namespace app\models\providers;
 
 use app\components\extensions\AppDataProvider;
 use app\components\GridConfig;
-use app\components\Tools;
+use app\models\Counter;
+use app\models\Terminal;
 use app\models\User;
-use app\models\Zone;
 use kartik\grid\DataColumn;
 use Mpdf\Tag\U;
 use yii\base\Model;
@@ -22,7 +22,7 @@ use yii\data\ActiveDataProvider;
 use yii\db\ActiveRecord;
 use yii\helpers\Url;
 
-class ZoneDataProvider extends AppDataProvider
+class TerminalDataProvider extends AppDataProvider
 {
 
     /**
@@ -30,18 +30,8 @@ class ZoneDataProvider extends AppDataProvider
      */
     function query()
     {
-        $this->query = Zone::find()->active()->joinWith('terminal');
+        $this->query = Terminal::find();
     }
-
-    //wen bta3rfe hyda l class lashu ?
-    //no
-    //men ismu
-    //bye3te data lal table lli betshufe bel website
-    //inti bihemmek l columns
-    //lawhen ray7a, 3am y2zellek fi ghalat\
-    //llon l asfar ya3ne fi ghalat hyda awwal lon ? abel abel
-    //eh hone kaffe
-    //zidi 3laion max passenger kermel ne2dar nshufon bass na3mol new zone
 
     /**
      * @return array
@@ -49,9 +39,8 @@ class ZoneDataProvider extends AppDataProvider
     function columns()
     {
         return [
+            ['attribute' => 'id'],
             ['attribute' => 'name'],
-            ['attribute' => 'terminal.name', 'label' => 'Terminal'],
-            ['attribute' => 'max_passenger', 'label' => 'Max Passenger Number'],
         ];
     }
 
@@ -61,6 +50,6 @@ class ZoneDataProvider extends AppDataProvider
      */
     function searchFields()
     {
-        return ['terminal.name'];
+        return [];
     }
 }

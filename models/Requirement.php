@@ -13,7 +13,7 @@ use Yii;
  * @property int $counter_id
  * @property string $date_start
  * @property string $date_end
- *
+ * @property int $buffer_time
  * @property FlightGroup $flightGroup
  * @property Counter $counter
  */
@@ -33,7 +33,7 @@ class Requirement extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'flight_group_id', 'counter_id'], 'integer'],
+            [['id', 'flight_group_id', 'counter_id', 'class_type', 'buffer_time'], 'integer'],
             [['date_start', 'date_end', 'flight_group_id'], 'required'],
             [['date_start', 'date_end'], function ($attribute, $params, $validator) {
                 $start = date_create($this->date_start);
@@ -66,6 +66,7 @@ class Requirement extends \yii\db\ActiveRecord
             'counter_id' => 'Counter ID',
             'date_start' => 'Date Start',
             'date_end' => 'Date End',
+            'buffer_time' => 'Buffer Time',
         ];
     }
 
