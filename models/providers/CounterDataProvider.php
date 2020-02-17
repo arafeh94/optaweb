@@ -46,7 +46,6 @@ class CounterDataProvider extends AppDataProvider
             ['attribute' => 'unavailabilityPeriodEndTime'],
             ['attribute' => 'ratio_passenger_per_timeunit'],
             ['attribute' => 'proximity'],
-            ['attribute' => 'total_passengers'],
         ];
     }
 

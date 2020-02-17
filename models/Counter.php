@@ -36,9 +36,9 @@ class Counter extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'range_id', 'belt_id', 'proximity','total_passengers','ratio_passenger_per_timeunit'], 'integer'],
+            [['id', 'range_id', 'belt_id', 'proximity','ratio_passenger_per_timeunit'], 'integer'],
             [['is_deleted'], 'boolean'],
-            [['unavailabilityPeriodStartTime', 'unavailabilityPeriodEndTime', 'proximity', 'ratio_passenger_per_timeunit', 'total_passengers'], 'safe'],
+            [['unavailabilityPeriodStartTime', 'unavailabilityPeriodEndTime', 'proximity', 'ratio_passenger_per_timeunit'], 'safe'],
             [['range_id'], 'exist', 'skipOnError' => true, 'targetClass' => Range::className(), 'targetAttribute' => ['range_id' => 'id']],
             [['belt_id'], 'exist', 'skipOnError' => true, 'targetClass' => Belt::className(), 'targetAttribute' => ['belt_id' => 'id']],
         ];
