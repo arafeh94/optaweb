@@ -42,6 +42,7 @@ class Counter extends \yii\db\ActiveRecord
             [['range_id'], 'exist', 'skipOnError' => true, 'targetClass' => Range::className(), 'targetAttribute' => ['range_id' => 'id']],
             [['belt_id'], 'exist', 'skipOnError' => true, 'targetClass' => Belt::className(), 'targetAttribute' => ['belt_id' => 'id']],
             ['belt_id', 'unique', 'message' => 'Belt already assigned'],
+            [['position_in_range', 'range_id'], 'unique', 'targetAttribute' => ['position_in_range'], 'message' => 'Position already assigned']
         ];
     }
 
