@@ -32,8 +32,9 @@ class Conjunction extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['belt_id_parent', 'belt_id_child','max_capacity'], 'integer'],
+            [['belt_id_parent', 'belt_id_child', 'max_capacity'], 'integer'],
             [['is_deleted'], 'boolean'],
+            ['belt_id_child', 'compare', 'compareAttribute' => 'belt_id_parent', 'operator' => '!='],
             [['belt_id_child'], 'exist', 'skipOnError' => true, 'targetClass' => Belt::className(), 'targetAttribute' => ['belt_id_child' => 'id']],
             [['belt_id_parent'], 'exist', 'skipOnError' => true, 'targetClass' => Belt::className(), 'targetAttribute' => ['belt_id_parent' => 'id']],
         ];

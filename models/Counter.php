@@ -41,6 +41,7 @@ class Counter extends \yii\db\ActiveRecord
             [['unavailabilityPeriodStartTime', 'unavailabilityPeriodEndTime', 'proximity', 'ratio_passenger_per_timeunit'], 'safe'],
             [['range_id'], 'exist', 'skipOnError' => true, 'targetClass' => Range::className(), 'targetAttribute' => ['range_id' => 'id']],
             [['belt_id'], 'exist', 'skipOnError' => true, 'targetClass' => Belt::className(), 'targetAttribute' => ['belt_id' => 'id']],
+            ['belt_id', 'unique', 'message' => 'Belt already assigned'],
         ];
     }
 
