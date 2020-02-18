@@ -40,7 +40,7 @@ class RequirementDataProvider extends AppDataProvider
         return [
             ['attribute' => 'id'],
             ['attribute' => 'date_start'],
-            ['attribute' => 'date_end'], //khalast hu2 kif issa l Requirement class
+            ['attribute' => 'date_end'],
             ['attribute' => 'buffer_time'],
             ['attribute' => 'flightGroup.id', 'label' => 'Flight Group'],
             ['attribute' => 'counter.id', 'label' => 'Counter'],

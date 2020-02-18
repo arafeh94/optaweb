@@ -29,6 +29,7 @@ if (!isset($model)) $model = new \app\models\Range();
     'options' => ['data-pjax' => '']
 ]) ?>
 <?= $form->field($model, 'id')->hiddenInput()->label(false) ?>
+<?= $form->field($model, 'position_in_zone')->textInput(['type' => 'number']) ?>
 <?= $form->field($model, 'zone_id')->label('Zone')->widget(\kartik\select2\Select2::classname(), [
     'data' => \yii\helpers\ArrayHelper::map(\app\models\Zone::find()->all(), 'id', 'name'),
     'options' => ['placeholder' => ''],

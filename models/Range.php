@@ -9,6 +9,7 @@ use Yii;
  *
  * @property int $id
  * @property int $zone_id
+ * @property int $position_in_zone
  * @property bool $is_deleted
  *
  * @property Counter[] $counters
@@ -30,7 +31,7 @@ class Range extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['zone_id'], 'integer'],
+            [['zone_id', 'position_in_zone'], 'integer'],
             [['is_deleted'], 'boolean'],
             [['zone_id'], 'exist', 'skipOnError' => true, 'targetClass' => Zone::className(), 'targetAttribute' => ['zone_id' => 'id']],
         ];
@@ -44,6 +45,7 @@ class Range extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'zone_id' => 'Zone ID',
+            'position_in_zone' => 'Position In Zone',
             'is_deleted' => 'Is Deleted',
         ];
     }

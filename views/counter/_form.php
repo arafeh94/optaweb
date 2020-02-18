@@ -46,7 +46,7 @@ if (!isset($model)) $model = new \app\models\Counter();
     'addon' => \app\components\Extensions::select2Add(['belt/index'], 'Add Belt')
 ]); ?>
 <?= $form->field($model, 'ratio_passenger_per_timeunit')->textInput() ?>
-<?//= $form->field($model, 'total_passengers')->textInput() ?>
+<?= $form->field($model, 'position_in_range')->textInput(['type' => 'number']) ?>
 <?= $form->field($model, 'proximity')->textInput() ?>
 <?= $form->field($model, 'unavailabilityPeriodStartTime')->widget(\kartik\time\TimePicker::className(), \app\components\Extensions::picker_time()) ?>
 <?= $form->field($model, 'unavailabilityPeriodEndTime')->widget(\kartik\time\TimePicker::className(), \app\components\Extensions::picker_time()) ?>

@@ -14,7 +14,7 @@ use Yii;
  * @property string unavailabilityPeriodEndTime
  * @property float ratio_passenger_per_timeunit
  * @property int proximity
- * @property int total_passengers
+ * @property int position_in_range
  *
  * @property Range $range
  * @property Belt $belt
@@ -36,7 +36,7 @@ class Counter extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'range_id', 'belt_id', 'proximity','ratio_passenger_per_timeunit'], 'integer'],
+            [['id', 'range_id', 'belt_id', 'proximity', 'ratio_passenger_per_timeunit', 'position_in_range'], 'integer'],
             [['is_deleted'], 'boolean'],
             [['unavailabilityPeriodStartTime', 'unavailabilityPeriodEndTime', 'proximity', 'ratio_passenger_per_timeunit'], 'safe'],
             [['range_id'], 'exist', 'skipOnError' => true, 'targetClass' => Range::className(), 'targetAttribute' => ['range_id' => 'id']],
@@ -54,9 +54,9 @@ class Counter extends \yii\db\ActiveRecord
             'zone_id' => 'Zone ID',
             'proximity' => 'Proximity',
             'ratio_passenger_per_timeunit' => 'Ratio Passenger Per TimeUnit',
-            'total_passengers' => 'Total Passenger',
             'unavailabilityPeriodStartTime' => 'Unavailability Period Start Time',
             'unavailabilityPeriodEndTime' => 'Unavailability Period End Time',
+            'position_in_range' => 'Position In Range',
         ];
     }
 

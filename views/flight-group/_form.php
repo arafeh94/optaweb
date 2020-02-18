@@ -30,6 +30,7 @@ if (!isset($model)) $model = new \app\models\FlightGroup();
 ]) ?>
 <?= $form->field($model, 'id')->hiddenInput()->label(false) ?>
 <?= $form->field($model, 'name')->textInput() ?>
+<?= $form->field($model, 'total_passengers')->textInput(['type' => 'number']) ?>
 <div class="button-container">
     <?= Html::submitButton(Html::tag('i', '', ['class' => 'glyphicon glyphicon-refresh spin hidden']) . ' submit', ['class' => 'btn btn-success', 'id' => 'modal-form-submit']) ?>
     <?= Html::button('close', ['data-dismiss' => "modal", 'class' => 'btn btn-danger']) ?>

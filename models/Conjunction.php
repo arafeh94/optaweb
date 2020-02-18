@@ -10,6 +10,7 @@ use Yii;
  * @property int $id
  * @property int $belt_id_parent
  * @property int $belt_id_child
+ * @property int $max_capacity
  * @property bool $is_deleted
  *
  * @property Belt $childBelt
@@ -31,7 +32,7 @@ class Conjunction extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['belt_id_parent', 'belt_id_child'], 'integer'],
+            [['belt_id_parent', 'belt_id_child','max_capacity'], 'integer'],
             [['is_deleted'], 'boolean'],
             [['belt_id_child'], 'exist', 'skipOnError' => true, 'targetClass' => Belt::className(), 'targetAttribute' => ['belt_id_child' => 'id']],
             [['belt_id_parent'], 'exist', 'skipOnError' => true, 'targetClass' => Belt::className(), 'targetAttribute' => ['belt_id_parent' => 'id']],
@@ -47,6 +48,7 @@ class Conjunction extends \yii\db\ActiveRecord
             'id' => 'ID',
             'belt_id_parent' => 'Belt Id Parent',
             'belt_id_child' => 'Belt Id Child',
+            'max_capacity' => 'Max Capacity',
             'is_deleted' => 'Is Deleted',
         ];
     }

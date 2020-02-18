@@ -61,6 +61,7 @@ class SolveController extends Controller
         $datesToSolve = Requirement::find()->select('date(date_start) as date_start')->distinct('date(date_start)')->all();
         $image = null;
         $output = null;
+        $kpi = null;
         if ($loaded) {
             $counter = Counter::find()->active()->asArray()->all();
             $zone = Zone::find()->active()->asArray()->all();
@@ -92,28 +93,30 @@ class SolveController extends Controller
             $batPath = 'fgplanner.bat';
             $image = 'gantt.png';
             file_put_contents($inputPath, $asJson);
-            Tools::forcePrint($asJson);
-            $output = shell_exec($batPath . ' ' . $inputPath);
-            $output = explode("\n", $output);
-            $result = end($output);
-            while ($result == "") $result = prev($output);
-            $result = json_decode($result, true);
-            $this->updateTables($result);
+            $command = $batPath . ' ' . $inputPath;
+            $output = shell_exec($command);
+            if ($output != "") {
+                $output = explode("\n", $output);
+                $result = end($output);
+                while ($result == "") $result = prev($output);
+                $result = json_decode($result, true);
+                $kpi = $result['score'];
+                $this->updateTables($result);
+            } else {
+                $this->redirect(['solve/index', 'error' => '400']);
+            }
         }
-        return $this->render('index', ['model' => $model, 'image' => $image, 'datesToSolve' => $datesToSolve, 'output' => $output]);
+        return $this->render('index', ['model' => $model, 'image' => $image, 'datesToSolve' => $datesToSolve, 'output' => $output, 'kpi' => $kpi]);
     }
 
     public function updateTables($result)
     {
-        //khalas ba2a he ma 3mlneha :o
-//        zakrine
-        //he badda test w manna mjahzin l test halla2
-        //Obakii
-        //halla2 badde ballesh json -> java w ba3da java -> json
-        //bas khalles lmafroud 3indi data kermel he taballesh fiyia
-        //iza allalet mrowe zakrine -_-
-        //okii
-
+        $requirements = $result['requirements'];
+        foreach ($requirements as $requirement) {
+            $model = Requirement::findOne($requirement['id']);
+            $model->counter_id = $requirement['counter_id'];
+            $model->save();
+        }
     }
 
 

@@ -29,6 +29,7 @@ if (!isset($model)) $model = new \app\models\Conjunction();
     'options' => ['data-pjax' => '']
 ]) ?>
 <?= $form->field($model, 'id')->hiddenInput()->label(false) ?>
+<?= $form->field($model, 'max_capacity')->textInput(['type' => 'number']) ?>
 <?= $form->field($model, 'belt_id_parent')->label('Parent Belt')->widget(\kartik\select2\Select2::classname(), [
     'data' => \yii\helpers\ArrayHelper::map(\app\models\Belt::find()->active()->all(), 'id', 'name'),
     'options' => ['placeholder' => ''],
