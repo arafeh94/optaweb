@@ -87,6 +87,7 @@ class SolveController extends Controller
                 'ranges' => $range,
                 'belts' => $belts,
                 'conjunctions' => $conjunctions,
+                'includeUnplanned' => $model->includeUnplanned,
             ];
             $asJson = json_encode($allData);
             $inputPath = 'input.json';

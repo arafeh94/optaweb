@@ -15,11 +15,14 @@ use yii\base\Model;
 class SolveForm extends Model
 {
     public $date;
+    public $includeUnplanned;
 
     public function rules()
     {
         return [
+            ['date', 'required'],
             ['date', 'date'],
+            ['includeUnplanned', 'boolean'],
         ];
     }
 

@@ -26,6 +26,8 @@ $kpiContent = <<<html
         <p class="card score soft">Preferences (Soft2):  <b>$kpi[soft2]</b> </p>
         <p class="card score soft">Zone Congestion (Soft3):  <b>$kpi[soft3]</b> </p>
         <p class="card score soft">Conjunction Congestion (Soft4):  <b>$kpi[soft4]</b> </p>
+        <p class="card score info">Unplanned Nb.:  <b>$kpi[unplanned]</b> </p>
+        <p class="card score info">Planned Nb.:  <b>$kpi[planned]</b> </p>
     </div>
 html;
 
@@ -50,6 +52,11 @@ html;
         color: white;
     }
 
+    .info {
+        color: white;
+        background-color: blueviolet;
+    }
+
     .panel-title {
         color: whitesmoke;
     }
@@ -64,6 +71,15 @@ html;
         'allowClear' => true
     ],
 ]); ?>
+
+<?= $form->field($model, 'includeUnplanned')->widget(\kartik\select2\Select2::classname(), [
+    'data' => [1 => 'Show', 0 => 'Hide'],
+    'options' => ['placeholder' => ''],
+    'pluginOptions' => [
+        'allowClear' => true
+    ],
+]); ?>
+
 <?= $output ? \yii\bootstrap\Collapse::widget([
     'items' => [
         [
@@ -94,3 +110,9 @@ html;
 <div style="width: 100%;display: flex">
     <?= $image ? Html::img('@web/gantt.png?' . date('Y:m:d H:i:s'), ['style' => 'margin: auto;']) : '' ?>
 </div>
+
+<script>
+    window.addEventListener('load', function () {
+        $('#solveform-includeunplanned').val(<?=$model->includeUnplanned ?: 0?>).trigger('change');
+    })
+</script>
