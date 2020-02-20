@@ -41,6 +41,7 @@ $navigationItems = [
     ['label' => 'Requirements', 'url' => ['requirement/index'], 'type' => 1],
     ['label' => 'Preferences', 'url' => ['flight-group-zone/index'], 'type' => 1],
     ['label' => 'Solve', 'url' => ['solve/index'], 'type' => 1],
+    ['label' => 'Planning Report', 'url' => ['report/index'], 'type' => 1],
 ];
 
 $currentAction = Yii::$app->controller->id . '/' . Yii::$app->controller->action->id;
