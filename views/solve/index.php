@@ -14,6 +14,7 @@ use yii\bootstrap\Html;
  * @var $image String
  * @var $output String
  * @var $model SolveForm
+ * @var $error String
  * @var $kpi []
  * @var $datesToSolve []
  */
@@ -28,6 +29,7 @@ $kpiContent = <<<html
         <p class="card score soft">Conjunction Congestion (Soft4):  <b>$kpi[soft4]</b> </p>
         <p class="card score info">Unplanned Nb.:  <b>$kpi[unplanned]</b> </p>
         <p class="card score info">Planned Nb.:  <b>$kpi[planned]</b> </p>
+        <p class="card score info">Time Spent:  <b>$kpi[time]ms</b> </p>
     </div>
 html;
 
@@ -37,9 +39,9 @@ html;
 <style>
     .score {
         padding: 8px;
-        display: inline;
+        display: inline-table;
         margin: 10px;
-        max-width: 80px;
+        max-width: 300px;
     }
 
     .hard {
@@ -54,13 +56,15 @@ html;
 
     .info {
         color: white;
-        background-color: blueviolet;
+        background-color: gray;
     }
 
     .panel-title {
         color: whitesmoke;
     }
 </style>
+
+<?= $error ? \kartik\alert\Alert::widget(['id' => 'form-state-alert', 'body' => $error, 'options' => ['class' => 'alert-danger']]) : '' ?>
 
 
 <?php $form = ActiveForm::begin([]) ?>
@@ -110,6 +114,7 @@ html;
 <div style="width: 100%;display: flex">
     <?= $image ? Html::img('@web/gantt.png?' . date('Y:m:d H:i:s'), ['style' => 'margin: auto;']) : '' ?>
 </div>
+
 
 <script>
     window.addEventListener('load', function () {

@@ -36,13 +36,14 @@ class Counter extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'range_id', 'belt_id', 'proximity', 'ratio_passenger_per_timeunit', 'position_in_range'], 'integer'],
+            [['id', 'range_id', 'belt_id', 'proximity' , 'position_in_range'], 'integer'],
+            ['ratio_passenger_per_timeunit', 'double'],
             [['is_deleted'], 'boolean'],
             [['unavailabilityPeriodStartTime', 'unavailabilityPeriodEndTime', 'proximity', 'ratio_passenger_per_timeunit'], 'safe'],
             [['range_id'], 'exist', 'skipOnError' => true, 'targetClass' => Range::className(), 'targetAttribute' => ['range_id' => 'id']],
             [['belt_id'], 'exist', 'skipOnError' => true, 'targetClass' => Belt::className(), 'targetAttribute' => ['belt_id' => 'id']],
-            ['belt_id', 'unique', 'message' => 'Belt already assigned'],
-            [['position_in_range', 'range_id'], 'unique', 'targetAttribute' => ['position_in_range'], 'message' => 'Position already assigned']
+            [['position_in_range'], 'unique', 'targetAttribute' => ['position_in_range', 'range_id', 'is_deleted'], 'message' => 'Position already assigned'],
+            [['belt_id'], 'unique', 'targetAttribute' => ['belt_id', 'is_deleted'], 'message' => 'Belt already assigned']
         ];
     }
 

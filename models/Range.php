@@ -34,7 +34,7 @@ class Range extends \yii\db\ActiveRecord
             [['zone_id', 'position_in_zone'], 'integer'],
             [['is_deleted'], 'boolean'],
             [['zone_id'], 'exist', 'skipOnError' => true, 'targetClass' => Zone::className(), 'targetAttribute' => ['zone_id' => 'id']],
-            [['position_in_zone', 'zone_id'], 'unique', 'targetAttribute' => ['position_in_zone'], 'message' => 'Position already assigned']
+            [['position_in_zone'], 'unique', 'targetAttribute' => ['position_in_zone', 'zone_id', 'is_deleted'], 'message' => 'Position already assigned']
         ];
     }
 

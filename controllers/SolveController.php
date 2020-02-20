@@ -62,6 +62,7 @@ class SolveController extends Controller
         $image = null;
         $output = null;
         $kpi = null;
+        $error = null;
         if ($loaded) {
             $counter = Counter::find()->active()->asArray()->all();
             $zone = Zone::find()->active()->asArray()->all();
@@ -103,11 +104,15 @@ class SolveController extends Controller
                 $result = json_decode($result, true);
                 $kpi = $result['score'];
                 $this->updateTables($result);
-            } else {
-                $this->redirect(['solve/index', 'error' => '400']);
+            }else{
+                $error = 'Error while executing command, please try again';
             }
         }
-        return $this->render('index', ['model' => $model, 'image' => $image, 'datesToSolve' => $datesToSolve, 'output' => $output, 'kpi' => $kpi]);
+        return $this->render('index', [
+            'model' => $model, 'image' => $image,
+            'datesToSolve' => $datesToSolve, 'output' => $output,
+            'kpi' => $kpi, 'error' => $error
+        ]);
     }
 
     public function updateTables($result)

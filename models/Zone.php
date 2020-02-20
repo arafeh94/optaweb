@@ -33,9 +33,10 @@ class Zone extends \yii\db\ActiveRecord
     {
         return [
             [['id', 'terminal_id', 'max_passenger'], 'integer'],
+            [['is_deleted'], 'safe'],
             [['name'], 'string', 'max' => 255],
             [['id'], 'unique'],
-            [['name', 'terminal_id'], 'unique', 'targetAttribute' => ['name'], 'message' => 'Name must be unique in each terminal']
+            [['name'], 'unique', 'targetAttribute' => ['name', 'terminal_id', 'is_deleted'], 'message' => 'Name must be unique in each terminal'],
         ];
     }
 
