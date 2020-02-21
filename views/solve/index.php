@@ -62,6 +62,11 @@ html;
     .panel-title {
         color: whitesmoke;
     }
+    #chart_div text {
+        fill: black !important;
+        font-weight: bold;
+        background-color: white;
+    }
 </style>
 
 <?= $error ? \kartik\alert\Alert::widget(['id' => 'form-state-alert', 'body' => $error, 'options' => ['class' => 'alert-danger']]) : '' ?>
@@ -135,6 +140,7 @@ html;
     function drawChart() {
         let data = new google.visualization.DataTable();
         let rows = [];
+        let id = 0;
         data.addColumn('string', 'Task ID');
         data.addColumn('string', 'Task Name');
         data.addColumn('string', 'Resource');
@@ -148,14 +154,19 @@ html;
             let title = flightGroup.title;
             let tasks = flightGroup.tasks;
             tasks.forEach(requirement => {
-                rows.push(gant_row(title, requirement.title, '', new Date(requirement.start), new Date(requirement.end), 0, null));
+                rows.push(gant_row(String(id++), requirement.title, title, new Date(requirement.start), new Date(requirement.end), 0, null));
             });
         });
 
         data.addRows(rows);
-
+        console.log(rows);
         let options = {
-            width: '100%'
+            width: '100%',
+            height: '800',
+            gantt: {
+                innerGridTrack: {fill: '#e7e5e5'},
+                innerGridDarkTrack: {fill: '#cccaca'},
+            },
         };
         let chart = new google.visualization.Gantt(document.getElementById('chart_div'));
         chart.draw(data, options);

@@ -117,12 +117,12 @@ class SolveController extends Controller
 
     public function updateTables($result)
     {
-        $requirements = $result['requirements'];
-        foreach ($requirements as $requirement) {
-            $model = Requirement::findOne($requirement['id']);
-            $model->counter_id = $requirement['counter_id'];
-            $model->save();
-        }
+//        $requirements = $result['requirements'];
+//        foreach ($requirements as $requirement) {
+//            $model = Requirement::findOne($requirement['id']);
+//            $model->counter_id = $requirement['counter_id'];
+//            $model->save();
+//        }
     }
 
 

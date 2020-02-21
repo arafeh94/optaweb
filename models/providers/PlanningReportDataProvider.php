@@ -52,7 +52,7 @@ class PlanningReportDataProvider extends AppDataProvider
             ['attribute' => 'id'],
             ['attribute' => 'flightGroup.name'],
             ['attribute' => 'counter.id', 'label' => 'Counter'],
-            ['attribute' => 'counter.position_in_range'],
+            ['attribute' => 'counter.position_in_range', 'label' => 'Range'],
             ['attribute' => 'counter.range.zone.name', 'label' => 'Zone'],
             ['attribute' => 'date_start'],
             ['attribute' => 'date_end'],
