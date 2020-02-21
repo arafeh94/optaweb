@@ -59,10 +59,10 @@ class SolveController extends Controller
         $model = new SolveForm();
         $loaded = $model->load(\Yii::$app->request->post());
         $datesToSolve = Requirement::find()->select('date(date_start) as date_start')->distinct('date(date_start)')->all();
-        $image = null;
         $output = null;
         $kpi = null;
         $error = null;
+        $data = null;
         if ($loaded) {
             $counter = Counter::find()->active()->asArray()->all();
             $zone = Zone::find()->active()->asArray()->all();
@@ -93,7 +93,6 @@ class SolveController extends Controller
             $asJson = json_encode($allData);
             $inputPath = 'input.json';
             $batPath = 'fgplanner.bat';
-            $image = 'gantt.png';
             file_put_contents($inputPath, $asJson);
             $command = $batPath . ' ' . $inputPath;
             $output = shell_exec($command);
@@ -103,15 +102,16 @@ class SolveController extends Controller
                 while ($result == "") $result = prev($output);
                 $result = json_decode($result, true);
                 $kpi = $result['score'];
+                $data = $result['data'];
                 $this->updateTables($result);
-            }else{
+            } else {
                 $error = 'Error while executing command, please try again';
             }
         }
         return $this->render('index', [
-            'model' => $model, 'image' => $image,
+            'model' => $model, 'data' => $data,
             'datesToSolve' => $datesToSolve, 'output' => $output,
-            'kpi' => $kpi, 'error' => $error
+            'kpi' => $kpi, 'error' => $error,
         ]);
     }
 

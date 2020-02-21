@@ -28,6 +28,7 @@ class AppAsset extends AssetBundle
         'js/bootstrap.js',
         'js/modalForm.js',
         'js/modalController.js',
+        'https://www.gstatic.com/charts/loader.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

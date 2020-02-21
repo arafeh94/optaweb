@@ -17,8 +17,8 @@ use yii\bootstrap\Html;
  * @var $error String
  * @var $kpi []
  * @var $datesToSolve []
+ * @var $data []
  */
-
 
 $kpiContent = <<<html
     <div id="kpi" s>
@@ -111,13 +111,53 @@ html;
 <?php ActiveForm::end(); ?>
 
 
-<div style="width: 100%;display: flex">
-    <?= $image ? Html::img('@web/gantt.png?' . date('Y:m:d H:i:s'), ['style' => 'margin: auto;']) : '' ?>
-</div>
+<?php if ($data): ?>
+    <div id="chart_div" style="margin-top: 12px"></div>
+<?php endif; ?>
 
 
 <script>
+    chartData = <?=$data ? json_encode($data) : '[]'?>;
     window.addEventListener('load', function () {
         $('#solveform-includeunplanned').val(<?=$model->includeUnplanned ?: 0?>).trigger('change');
-    })
+        loadChart();
+    });
+
+    function loadChart() {
+        google.charts.load('current', {'packages': ['gantt']});
+        google.charts.setOnLoadCallback(drawChart);
+    }
+
+    function gant_row(title, task, category, start, end, completion, previous) {
+        return [title, task, category, start, end, null, completion, previous];
+    }
+
+    function drawChart() {
+        let data = new google.visualization.DataTable();
+        let rows = [];
+        data.addColumn('string', 'Task ID');
+        data.addColumn('string', 'Task Name');
+        data.addColumn('string', 'Resource');
+        data.addColumn('date', 'Start Date');
+        data.addColumn('date', 'End Date');
+        data.addColumn('number', 'Duration');
+        data.addColumn('number', 'Percent Complete');
+        data.addColumn('string', 'Dependencies');
+
+        chartData.taskSeriesCollection.forEach(flightGroup => {
+            let title = flightGroup.title;
+            let tasks = flightGroup.tasks;
+            tasks.forEach(requirement => {
+                rows.push(gant_row(title, requirement.title, '', new Date(requirement.start), new Date(requirement.end), 0, null));
+            });
+        });
+
+        data.addRows(rows);
+
+        let options = {
+            width: '100%'
+        };
+        let chart = new google.visualization.Gantt(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    }
 </script>
